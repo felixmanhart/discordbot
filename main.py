@@ -1,13 +1,12 @@
 import asyncio
 import json
 import os
-
 import discord
+
 from discord.ext import commands
+from dotenv import load_dotenv
 
-
-with open("config.json", "r") as f:
-    config = json.load(f)
+load_dotenv()
     
 bot = commands.Bot(command_prefix="!", intents=discord.Intents.all())
 bot.remove_command("help")
@@ -54,7 +53,7 @@ async def load():
 
 async def main():
     await load()
-    await bot.start(config["TOKEN"])
+    await bot.start(os.getenv("TOKEN"))
 
 
 

@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 discord = "2.0.0"
 discord-ui = "5.1.6"
+python-dotenv = "0.21.0"
 
 [requires]
 python_version = "3.10"
