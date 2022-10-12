@@ -4,3 +4,5 @@ services:
   app:
     container_name: rudealts-bot
     build: .
+    environment:
+      - "TOKEN=insert token here"
