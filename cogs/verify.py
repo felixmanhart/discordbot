@@ -34,13 +34,14 @@ class VerifyCog(commands.Cog):
     def __init__(self, bot):
         self.bot: commands.Bot = bot
 
-        self.VERIFY_CHANNEL = 1020817052073734197
-        self.role_id = 885136322514276408
-        self.guild_id = 885136322514276402
+        self.VERIFY_CHANNEL = 1030518081199546448
+        self.role_id = 939576981245263872
+        self.guild_id = 938105317781307392
 
         print("Registered verify cog")
 
     @commands.command()
+    @commands.has_permissions(administrator=True)
     async def post(self, ctx: commands.Context):  # Command
         view = discord.ui.View(timeout=None)
 

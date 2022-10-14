@@ -7,10 +7,10 @@ class TicketCog(commands.Cog):
     def __init__(self, bot):
         self.bot: commands.Bot = bot
 
-        self.GUILD_ID = 885136322514276402
-        self.TEAM_ROLE = 885136322698838019
-        self.TICKET_CHANNEL = 1023208506314211359
-        self.CATEGORY_ID = 1028570102691532892
+        self.GUILD_ID = 938105317781307392
+        self.TEAM_ROLE = 1030518060559372318
+        self.TICKET_CHANNEL = 1030518079857369190
+        self.CATEGORY_ID = 1030518071003201666
 
         print("Registered ticket Cog")
 
