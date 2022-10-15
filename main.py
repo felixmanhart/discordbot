@@ -43,13 +43,12 @@ async def on_command_error(ctx, error):
         embed.add_field(name="Access denied", value='You don\'t have Permissions to do that.')
         await ctx.send(embed= embed)
         await ctx.message.delete()
-@ping.error
-async def ping(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title=f"You can only ping every 48 hours!",
-                           description=f"Try again <t:{time.time() + error.retry_after:.0f}:R>.", colour=discord.Colour.red())
+                           description=f"Try again in 48h.", colour=discord.Colour.red())
         await ctx.send(embed=em, delete_after=10)
         await ctx.message.delete()
+
 
 
 async def load():
