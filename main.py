@@ -29,7 +29,7 @@ async def help(ctx):
 
 @bot.command()
 @commands.has_role(1030540753224605716)
-@commands.cooldown(1, 60 * 60 * 24 * 2, commands.BucketType.user)
+@commands.cooldown(1, 172800, commands.BucketType.user)
 async def ping(ctx: commands.Context):
     await ctx.send(f'{ctx.guild.default_role}')
     message: discord.Message = ctx.message
@@ -43,9 +43,13 @@ async def on_command_error(ctx, error):
         embed.add_field(name="Access denied", value='You don\'t have Permissions to do that.')
         await ctx.send(embed= embed)
         await ctx.message.delete()
+@ping.error
+async def ping(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
-        em = discord.Embed(colour=discord.Colour.red(), description=f"Can\'t mention everyone, pls try again in Try again <t:{time.time() + error.retry_after:.0f}:R>.")
-        await ctx.send(embed=em)
+        em = discord.Embed(title=f"You can only ping every 48 hours!",
+                           description=f"Try again <t:{time.time() + error.retry_after:.0f}:R>.", colour=discord.Colour.red())
+        await ctx.send(embed=em, delete_after=10)
+        await ctx.message.delete()
 
 
 async def load():
