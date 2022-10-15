@@ -44,9 +44,8 @@ async def on_command_error(ctx, error):
         await ctx.send(embed= embed)
         await ctx.message.delete()
     if isinstance(error, commands.CommandOnCooldown):
-        timeRemaining = str(datetime.timedelta(seconds = int(error.retry_after)))
         em = discord.Embed(colour=discord.Colour.red(), description=f"""
-        Can\'t mention everyone, pls try again in {timeRemaining}.""")
+        Can\'t mention everyone, pls try again in {:.2}.""")
         await ctx.send(embed=em)
 
 
