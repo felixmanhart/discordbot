@@ -28,10 +28,10 @@ async def help(ctx):
     await ctx.send(embed=em)
 
 @bot.command()
-@commands.has_role(1030540753224605716)
+@commands.has_role("ping permission")
 @commands.cooldown(1, 172800, commands.BucketType.user)
 async def ping(ctx: commands.Context):
-    await ctx.send(f'{ctx.guild.default_role}')
+    await ctx.send(f'{ctx.guild.default_role}', delete_after=172800)
     message: discord.Message = ctx.message
 
     await message.delete()
