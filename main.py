@@ -12,7 +12,7 @@ bot.remove_command("help")
 
 @bot.event
 async def on_ready():
-    await bot.change_presence(activity=discord.Game('Rude Alts | !help'))
+    await bot.change_presence(activity=discord.Game('Nitro | !help'))
     print("Started!")
 
 @bot.command()

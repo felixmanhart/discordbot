@@ -9,6 +9,8 @@ class ModerationCog(commands.Cog):
         self.bot: commands.Bot = bot
         print("Registered Moderation Cog")
 
+        self.PRICE_CHANNEL = 1030518089307132025
+
     @commands.command()
     @commands.has_permissions(kick_members=True)
     async def kick(self, ctx, member: discord.Member, *, reason=None):
@@ -80,5 +82,14 @@ class ModerationCog(commands.Cog):
                     return
             await ctx.send(f'The user `{member}` is not banned.')
 
+    @commands.command()
+    @commands.has_permissions(administrator=True)
+    async def prices(self, ctx):
+        emb = discord.Embed(title="Discord Nitro Prices",description="Prices for Discord Nitro!" , color=discord.Colour.purple())
+        emb.add_field(name="Monthly", value="Nitro Classic 2.50€\n Nitro Boost 3.50€")
+        emb.add_field(name="Yearly", value="Nitro Classic 6€\n Nitro Boost 9€", inline=False)
+        channel = self.bot.get_channel(self.PRICE_CHANNEL)
+        await channel.send(embed=emb)
+        await ctx.reply("Send!")
 async def setup(bot):
     await bot.add_cog(ModerationCog(bot))
