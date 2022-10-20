@@ -88,8 +88,7 @@ class ModerationCog(commands.Cog):
         emb = discord.Embed(title="Discord Nitro Prices",description="Prices for Discord Nitro!" , color=discord.Colour.purple())
         emb.add_field(name="Monthly", value="Nitro Classic 2.50€\n Nitro Boost 3.50€")
         emb.add_field(name="Yearly", value="Nitro Classic 6€\n Nitro Boost 9€", inline=False)
-        channel = self.bot.get_channel(self.PRICE_CHANNEL)
-        await channel.send(embed=emb)
+        await ctx.send(embed=emb)
         await ctx.reply("Send!")
 async def setup(bot):
     await bot.add_cog(ModerationCog(bot))
