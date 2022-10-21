@@ -88,7 +88,7 @@ class ModerationCog(commands.Cog):
         emb = discord.Embed(title="Discord Nitro Prices",description="Prices for Discord Nitro!" , color=discord.Colour.red())
         emb.add_field(name="Monthly", value="Nitro Classic 2.50€\n Nitro Boost 3.50€")
         emb.add_field(name="Yearly", value="Nitro Classic 6€\n Nitro Boost 9€", inline=False)
-        emb.set_image(url="icon_url="https://cdn.discordapp.com/attachments/1030518107388788736/1033064806900563998/static.png"")
+        emb.set_image(url="https://cdn.discordapp.com/attachments/1030518107388788736/1033064806900563998/static.png")
         emb.set_footer(icon_url="https://cdn.discordapp.com/attachments/1030518107388788736/1033064806900563998/static.png", text="Nitro | Simple Service")
         await ctx.send(embed=emb)
         await ctx.reply("Send!")
