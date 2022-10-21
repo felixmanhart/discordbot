@@ -20,7 +20,7 @@ class TicketCog(commands.Cog):
         button1 = Button(label="📩 Open ticket!", style=discord.ButtonStyle.grey, custom_id="ticket_button")
         view = View()
         view.add_item(button1)
-        embed = discord.Embed(description=f"React with 📩 to open a ticket!", title=f"Support & Contact", color=discord.Colour.green())
+        embed = discord.Embed(description=f"", title=f"Shop & Contact", color=discord.Colour.red())
         channel = self.bot.get_channel(self.TICKET_CHANNEL)
         await channel.send(embed=embed, view=view)
         await ctx.reply("Send!")
