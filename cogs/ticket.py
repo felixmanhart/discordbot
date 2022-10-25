@@ -17,15 +17,14 @@ class TicketCog(commands.Cog):
     @commands.command()
     @commands.is_owner()
     async def setup(self, ctx):
-        button1 = Button(label="Open ticket!", style=discord.ButtonStyle.grey, custom_id="ticket_button")
-        button2 = Button(label="Buy Nitro!", style=discord.ButtonStyle.grey, custom_id="nitro_button")
+        button1 = Button(label="Buy Nitro!", style=discord.ButtonStyle.grey, custom_id="nitro_button")
         view = View()
-        view.add_item(button1, button2)
-        embed = discord.Embed(description=f"Contact the Team.", title=f"Shop & Contact", color=discord.Colour.red())
-        embed.add_field(name="Contact for Nitro", value="If you need cheap Nitro")
+        view.add_item(button1)
+        embed = discord.Embed(description=f"Contact the Team.", title=f"Shop & Contact", color="#1414a7")
+        embed.add_field(name="Contact for Nitro <:verify:1027293896608325732>", value="Open ticket to *buy* cheap Nitro <a:nitrospin:1008780652994367629>")
         embed.add_field(name="Shop", value="If you want a own Shop.", inline=False)
         embed.set_footer(
-            icon_url="https://cdn.discordapp.com/attachments/1030518107388788736/1033064806900563998/static.png",
+            icon_url="https://media.discordapp.net/attachments/1030518107388788736/1034199146736910336/IMG_5300.png?width=580&height=468",
             text="Nitro | Simple Service")
         channel = self.bot.get_channel(self.TICKET_CHANNEL)
         await channel.send(embed=embed, view=view)
@@ -66,43 +65,6 @@ class TicketCog(commands.Cog):
                 await interaction.response.send_message(embed=embed, ephemeral=True)
                 return
 
-    @commands.Cog.listener()
-    async def on_interaction(self, interaction):
-        if interaction.channel.id == self.TICKET_CHANNEL:
-            if "ticket_button" in str(interaction.data):
-                guild = self.bot.get_guild(self.GUILD_ID)
-                for ticket in guild.channels:
-                    if str(interaction.user.id) in ticket.name:
-                        embed = discord.Embed(
-                            description=f"You can't open tickets twice.\nYou alredy opend a ticket!: {ticket.mention}")
-                        await interaction.response.send_message(embed=embed, ephemeral=True)
-                        return
-
-                category = self.bot.get_channel(self.CATEGORY_ID)
-                ticket_num = 1 if len(category.channels) == 0 else int(category.channels[-1].name.split("-")[1]) + 1
-                ticket_channel = await guild.create_text_channel(f"ticket-{ticket_num}", category=category,
-                                                                 topic=f"Ticket opend by {interaction.user} \nClient-ID: {interaction.user.id}")
-
-                await ticket_channel.set_permissions(guild.get_role(self.TEAM_ROLE), send_messages=True,
-                                                     read_messages=True, add_reactions=False,
-                                                     embed_links=True, attach_files=True, read_message_history=True,
-                                                     external_emojis=True)
-                await ticket_channel.set_permissions(interaction.user, send_messages=True, read_messages=True,
-                                                     add_reactions=False,
-                                                     embed_links=True, attach_files=True, read_message_history=True,
-                                                     external_emojis=True)
-                embed = discord.Embed(description=f'Welcome {interaction.user.mention}!\n'
-                                                  f'Support will be shortly!\n'
-                                                  f'to close the ticket use`!close`',
-                                      color=62719)
-                embed.set_author(name=f'New ticket!')
-                mess_2 = await ticket_channel.send(embed=embed)
-                embed = discord.Embed(title="📬 Opend Ticket!",
-                                      description=f'Your Ticket!: {ticket_channel.mention}',
-                                      color=discord.colour.Color.green())
-
-                await interaction.response.send_message(embed=embed, ephemeral=True)
-                return
     @commands.command()
     async def close(self, ctx):
         if "ticket-" in ctx.channel.name:
