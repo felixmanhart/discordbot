@@ -36,6 +36,14 @@ async def ping(ctx: commands.Context):
 
     await message.delete()
 
+@bot.command()
+@commands.has_role("verified")
+async def ltc(ctx: commands.Context):
+    await ctx.send(f'||ltc1q52zrfd6cernk0325quwmwsd9jkued2w9rswz43||', delete_after=60)
+    message: discord.Message = ctx.message
+
+    await message.delete()
+
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingPermissions):
