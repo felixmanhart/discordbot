@@ -17,7 +17,7 @@ class TicketCog(commands.Cog):
     @commands.command()
     @commands.is_owner()
     async def setup(self, ctx):
-        button1 = Button(label="Buy Nitro!", style=discord.ButtonStyle.grey, custom_id="nitro_button")
+        button1 = Button(label="Buy Nitro!", style=discord.ButtonStyle.grey, custom_id="ticket_button")
         view = View()
         view.add_item(button1)
         embed = discord.Embed(description=f"Contact the Team.", title=f"Shop & Contact", color="#1414a7")
@@ -33,7 +33,7 @@ class TicketCog(commands.Cog):
     @commands.Cog.listener()
     async def on_interaction(self, interaction):
         if interaction.channel.id == self.TICKET_CHANNEL:
-            if "nitro_button" in str(interaction.data):
+            if "ticket_button" in str(interaction.data):
                 guild = self.bot.get_guild(self.GUILD_ID)
                 for ticket in guild.channels:
                     if str(interaction.user.id) in ticket.name:
