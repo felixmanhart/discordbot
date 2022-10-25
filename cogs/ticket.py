@@ -17,12 +17,10 @@ class TicketCog(commands.Cog):
     @commands.command()
     @commands.is_owner()
     async def setup(self, ctx):
-        button1 = Button(label="Buy Nitro!", style=discord.ButtonStyle.grey, custom_id="ticket_button")
+        button1 = Button(label="Create Ticket!", style=discord.ButtonStyle.blurple, custom_id="ticket_button")
         view = View()
         view.add_item(button1)
-        embed = discord.Embed(description=f"Contact the Team.", title=f"Shop & Contact", color=14147)
-        embed.add_field(name="Contact for Nitro", value="Open ticket to *buy* cheap Nitro")
-        embed.add_field(name="Shop", value="If you want a own Shop.", inline=False)
+        embed = discord.Embed(description=f"Click the **create ticket** button to start purchasing. Please read the informations carefully before making your selection.", title=f"Shop & Contact", color=14147)
         embed.set_footer(
             icon_url="https://media.discordapp.net/attachments/1030518107388788736/1034199146736910336/IMG_5300.png?width=580&height=468",
             text="Tickets | Simple Service")
