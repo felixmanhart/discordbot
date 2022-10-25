@@ -20,7 +20,7 @@ class TicketCog(commands.Cog):
         button1 = Button(label="Create Ticket!", style=discord.ButtonStyle.blurple, custom_id="ticket_button")
         view = View()
         view.add_item(button1)
-        embed = discord.Embed(description=f"Click the **create ticket** button to start purchasing. Please read the informations carefully before making your selection.", title=f"Shop & Contact", color=hex("1414a7"))
+        embed = discord.Embed(description=f"Click the **create ticket** button to start purchasing. Please read the informations carefully before making your selection.", title=f"Shop & Contact", color=discord.Colour.blue())
         embed.set_footer(
             icon_url="https://cdn.discordapp.com/attachments/1030518107388788736/1034489620957777970/unknown.png",
             text="Tickets | Simple Service")
