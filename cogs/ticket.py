@@ -20,7 +20,7 @@ class TicketCog(commands.Cog):
         button1 = Button(label="Buy Nitro!", style=discord.ButtonStyle.grey, custom_id="ticket_button")
         view = View()
         view.add_item(button1)
-        embed = discord.Embed(description=f"Contact the Team.", title=f"Shop & Contact", color="#1414a7")
+        embed = discord.Embed(description=f"Contact the Team.", title=f"Shop & Contact", color=14147)
         embed.add_field(name="Contact for Nitro", value="Open ticket to *buy* cheap Nitro")
         embed.add_field(name="Shop", value="If you want a own Shop.", inline=False)
         embed.set_footer(
@@ -43,7 +43,7 @@ class TicketCog(commands.Cog):
 
                 category = self.bot.get_channel(self.CATEGORY_ID)
                 ticket_num= 1 if len(category.channels) == 0 else int(category.channels[-1].name.split("-")[1]) + 1
-                ticket_channel = await guild.create_text_channel(f"nitro-{interaction.user}", category=category,
+                ticket_channel = await guild.create_text_channel(f"ticket-{ticket_num}", category=category,
                                                                 topic=f"Ticket opend by {interaction.user} \nClient-ID: {interaction.user.id}")
 
                 await ticket_channel.set_permissions(guild.get_role(self.TEAM_ROLE), send_messages=True, read_messages=True, add_reactions=False,
