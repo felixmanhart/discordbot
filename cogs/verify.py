@@ -46,11 +46,11 @@ class VerifyCog(commands.Cog):
         view = discord.ui.View(timeout=None)
 
         view.add_item(RoleButton(self.role_id))
-        embed = discord.Embed(description=f"In order to get access to {ctx.guild.name} you must click the button below.", title=f"<:verify:1027293896608325732> Verification Required",
+        embed = discord.Embed(description=f"In order to get access to {ctx.guild.name} you must click the button below.", title=f"Verification Required",
                               color=discord.Colour.red())
         embed.set_footer(
             icon_url="https://media.discordapp.net/attachments/1030518107388788736/1034199146736910336/IMG_5300.png?width=580&height=468",
-            text="Nitro | Simple Service")
+            text="Verify | Simple Service")
         channel = self.bot.get_channel(self.VERIFY_CHANNEL)
         await channel.send(embed=embed, view=view)
         await ctx.send('Sent Verification Embed')

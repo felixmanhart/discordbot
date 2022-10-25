@@ -21,11 +21,11 @@ class TicketCog(commands.Cog):
         view = View()
         view.add_item(button1)
         embed = discord.Embed(description=f"Contact the Team.", title=f"Shop & Contact", color="#1414a7")
-        embed.add_field(name="Contact for Nitro <:verify:1027293896608325732>", value="Open ticket to *buy* cheap Nitro <a:nitrospin:1008780652994367629>")
+        embed.add_field(name="Contact for Nitro", value="Open ticket to *buy* cheap Nitro")
         embed.add_field(name="Shop", value="If you want a own Shop.", inline=False)
         embed.set_footer(
             icon_url="https://media.discordapp.net/attachments/1030518107388788736/1034199146736910336/IMG_5300.png?width=580&height=468",
-            text="Nitro | Simple Service")
+            text="Tickets | Simple Service")
         channel = self.bot.get_channel(self.TICKET_CHANNEL)
         await channel.send(embed=embed, view=view)
         await ctx.reply("Send!")
