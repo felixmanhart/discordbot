@@ -17,17 +17,15 @@ class TicketCog(commands.Cog):
     @commands.command()
     @commands.is_owner()
     async def setup(self, ctx):
-        button1 = discord.Button(label="Create Ticket!", style=discord.ButtonStyle.blurple, custom_id="ticket_button")
+        button1 = Button(label="Create Ticket!", style=discord.ButtonStyle.blurple, custom_id="ticket_button")
+        button2 = Button(label="Buy!", style=discord.ButtonStyle.green, custom_id="buy_button")
         view = View()
-        view.add_item(button1)
-        embed = discord.Embed(description="""Click the **create ticket** button to start purchasing. 
-        Please read the informations carefully before making your selection.""", title=f"Shop & Contact", color=discord.Colour.blue())
-        embed.set_footer(
-            icon_url="https://cdn.discordapp.com/attachments/1030518107388788736/1034489620957777970/unknown.png",
-            text="Tickets | Simple Service")
+        view.add_item(button1, button2)
+        embed = discord.Embed(description="Only **create a Ticket** if you want to buy or need help!", title=f"Buy & Support", colour=discord.Colour.blue())
         channel = self.bot.get_channel(self.TICKET_CHANNEL)
         await channel.send(embed=embed, view=view)
-        await ctx.reply("Send!")
+        await ctx.send("Sent!")
+
 
     @commands.Cog.listener()
     async def on_interaction(self, interaction):
@@ -68,7 +66,7 @@ class TicketCog(commands.Cog):
     async def close(self, ctx):
         if "ticket-" in ctx.channel.name:
             embed = discord.Embed(
-                description=f'ticket will be closed in 5 seconds.',
+                description=f'**Ticket will be closed in 5 seconds.**',
                 color=16711680)
         await ctx.channel.send(embed=embed)
         await asyncio.sleep(5)

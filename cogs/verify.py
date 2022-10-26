@@ -35,7 +35,7 @@ class VerifyCog(commands.Cog):
         self.bot: commands.Bot = bot
 
         self.VERIFY_CHANNEL = 1030518081199546448
-        self.role_id = 939576981245263872
+        self.role_id = 1034807355583512657
         self.guild_id = 938105317781307392
 
         print("Registered verify cog")
