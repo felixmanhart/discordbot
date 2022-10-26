@@ -17,7 +17,7 @@ class TicketCog(commands.Cog):
     @commands.command()
     @commands.is_owner()
     async def setup(self, ctx):
-        button1 = Button(label="Create Ticket!", style=discord.ButtonStyle.blurple, custom_id="ticket_button")
+        button1 = discord.Button(label="Create Ticket!", style=discord.ButtonStyle.blurple, custom_id="ticket_button")
         view = View()
         view.add_item(button1)
         embed = discord.Embed(description="""Click the **create ticket** button to start purchasing. 
@@ -41,7 +41,7 @@ class TicketCog(commands.Cog):
                         return
 
                 category = self.bot.get_channel(self.CATEGORY_ID)
-                ticket_num= 1 if len(category.channels) == 0 else int(category.channels[-1].name.split("-")[1]) + 1
+                ticket_num = 1 if len(category.channels) == 0 else int(category.channels[-1].name.split("-")[1]) + 1
                 ticket_channel = await guild.create_text_channel(f"ticket-{ticket_num}", category=category,
                                                                 topic=f"Ticket opend by {interaction.user} \nClient-ID: {interaction.user.id}")
 
