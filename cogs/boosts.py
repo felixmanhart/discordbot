@@ -27,7 +27,7 @@ class BoostsCog(commands.Cog):
         emb.add_field(name="Buy", value="If you want **buy server boosts** click the button down below!", inline=False)
         channel = self.bot.get_channel(self.TICKET_CHANNEL)
         await channel.send(embed=emb, view=view)
-        await ctx.send(f":white:check_mark: Sent!")
+        await ctx.send(f"✅ Sent!")
 
     @commands.Cog.listener()
     async def on_interaction(self, interaction):
