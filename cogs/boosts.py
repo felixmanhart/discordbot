@@ -3,7 +3,7 @@ import discord
 from discord.ui import Button, View
 from discord.ext import commands
 
-class BoostCog(commands.Cog):
+class BoostsCog(commands.Cog):
     def __init__(self, bot):
         self.bot: commands.Bot = bot
 
@@ -73,4 +73,4 @@ class BoostCog(commands.Cog):
         await ctx.channel.delete()
 
 async def setup(bot):
-    await bot.add_cog(BoostCog(bot))
+    await bot.add_cog(BoostsCog(bot))

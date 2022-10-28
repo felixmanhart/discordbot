@@ -55,7 +55,7 @@ async def paypal(ctx):
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingPermissions):
-        embed = discord.Embed(color= discord.Color.red())
+        embed = discord.Embed(color=discord.Color.red())
         embed.add_field(name="Access denied", value='You don\'t have Permissions to do that.')
         await ctx.send(embed= embed)
         await ctx.message.delete()
