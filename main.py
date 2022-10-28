@@ -52,8 +52,6 @@ async def paypal(ctx):
 
     await message.delete()
 
-
-
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingPermissions):

@@ -30,7 +30,7 @@ class BoostCog(commands.Cog):
     @commands.Cog.listener()
     async def on_interaction(self, interaction):
         if interaction.channel.id == self.TICKET_CHANNEL:
-            if "buy_button" in str(interaction.data):
+            if "boost_button" in str(interaction.data):
                 guild = self.bot.get_guild(self.GUILD_ID)
                 for ticket in guild.channels:
                     if str(interaction.user.id) in ticket.name:
