@@ -44,6 +44,12 @@ async def ltc(ctx: commands.Context):
 
     await message.delete()
 
+@bot.command()
+@command.has_permission(administrator=True)
+async def pp(ctx: commands.Context)
+    await ctx.send(f"raionsozials@gmail.com\nfriends & family \n+screenshot", delete_after=60)
+    await message.delete()
+
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingPermissions):
