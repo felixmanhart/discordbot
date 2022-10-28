@@ -17,15 +17,15 @@ class BoostsCog(commands.Cog):
     @commands.command()
     @commands.is_owner()
     async def boosts(self, ctx):
-        button1 = Button(label=":booster: Buy Boosts!", style=discord.ButtonStyle.grey, custom_id="boost_button")
+        button1 = Button(label="<:booster:1035680324551708824> Buy Boosts!", style=discord.ButtonStyle.grey, custom_id="boost_button")
         view = View()
         view.add_item(button1)
-        emb = discord.Embed(description="If you need *cheap* server boosts:", title=f":booster: **Server Boosts**", colour=discord.Colour.purple())
-        emb.add_field(name="3 Months", value="**7 Boosts** = $8 :pp:/ $7 :ltc:\n **14 Boosts** $15 :pp:/ $10 :ltc:", inline=False)
-        emb.add_field(name=":yes:", value="If you want **buy server boosts** click the button down below!", inline=False)
+        emb = discord.Embed(description="If you need *cheap* server boosts:", title=f"<:booster:1035680324551708824> **Server Boosts**", colour=discord.Colour.purple())
+        emb.add_field(name="3 Months", value="**7 Boosts** = $8 :pp:/ $7 :ltc:\n **14 Boosts** $15 <:pp:1035680665053696111>/ $10 <:ltc;1035680675350708234>", inline=False)
+        emb.add_field(name="<:yes:1035680359309901864>", value="If you want **buy server boosts** click the button down below!", inline=False)
         channel = self.bot.get_channel(self.TICKET_CHANNEL)
         await channel.send(embed=emb, view=view)
-        await ctx.send(":yes: Sent!")
+        await ctx.send("<:yes:1035680359309901864> Sent!")
 
     @commands.Cog.listener()
     async def on_interaction(self, interaction):
