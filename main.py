@@ -62,7 +62,7 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title=f"You can only ping every 48 hours!",
                            description=f"Try again in 48h.", colour=discord.Colour.red())
-        await ctx.send(embed=em, delete_after=10)
+        await ctx.send(embed=em, delete_after=5)
         await ctx.message.delete()
 
 
