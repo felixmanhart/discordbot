@@ -70,7 +70,7 @@ async def on_command_error(ctx, error):
 async def load():
     for filename in os.listdir('./cogs'):
         if filename.endswith('.py') and filename.find("__") == -1:
-            await bot.load_extension(f'cogs.{filename[:-4]}')
+            await bot.load_extension(f'cogs.{filename[:-3]}')
 
 
 async def main():
