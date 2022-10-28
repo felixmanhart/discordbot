@@ -17,7 +17,7 @@ class TicketCog(commands.Cog):
     @commands.command()
     @commands.is_owner()
     async def setup(self, ctx):
-        button1 = Button(label="Support!", style=discord.ButtonStyle.red, custom_id="support_button")
+        button1 = Button(label="Support!", style=discord.ButtonStyle.red, custom_id="ticket_button")
         button2 = Button(label="Buy!", style=discord.ButtonStyle.red, custom_id="buy_button")
         view = View()
         view.add_item(button1)
@@ -34,7 +34,7 @@ class TicketCog(commands.Cog):
     @commands.Cog.listener()
     async def on_interaction(self, interaction):
         if interaction.channel.id == self.TICKET_CHANNEL:
-            if "support_button" in str(interaction.data):
+            if "ticket_button" in str(interaction.data):
                 guild = self.bot.get_guild(self.GUILD_ID)
                 for ticket in guild.channels:
                     if str(interaction.user.id) in ticket.name:
