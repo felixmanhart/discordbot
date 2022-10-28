@@ -100,7 +100,7 @@ class TicketCog(commands.Cog):
 
     @commands.command()
     async def close(self, ctx):
-        if "ticket-" in ctx.channel.name:
+        if "ticket-" or "buy-" in ctx.channel.name:
             embed = discord.Embed(
                 description=f'**Ticket will be closed in 5 seconds.**',
                 color=16711680)
