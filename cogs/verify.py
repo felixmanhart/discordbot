@@ -10,7 +10,7 @@ class RoleButton(discord.ui.Button):
 
         super().__init__(
             label="\u2705 Verify!",
-            style=discord.enums.ButtonStyle.blurple,
+            style=discord.enums.ButtonStyle.green,
             custom_id="interaction:RoleButton",
         )
 
@@ -47,11 +47,11 @@ class VerifyCog(commands.Cog):
 
         view.add_item(RoleButton(self.role_id))
         embed = discord.Embed(description=f"In order to get access to {ctx.guild.name} you must click the button below.", title=f"Verification Required",
-                              color=discord.Colour.dark_blue())
+                              color=discord.Colour.blue())
         embed.set_footer(
             icon_url="https://cdn.discordapp.com/attachments/1030518107388788736/1035695718255579208/1.png",
             text="Verify | Simple Service")
-        embed.set_image(url="https://media.discordapp.net/attachments/1030518107388788736/1035696927997706321/unknown.png?width=565&height=468")
+        embed.set_thumbnail("https://media.discordapp.net/attachments/1030518107388788736/1035696927997706321/unknown.png?width=565&height=468")
         channel = self.bot.get_channel(self.VERIFY_CHANNEL)
         await channel.send(embed=embed, view=view)
         await ctx.send('Sent Verification Embed')
