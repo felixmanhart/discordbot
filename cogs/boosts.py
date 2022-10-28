@@ -57,7 +57,7 @@ class BoostsCog(commands.Cog):
                                                      add_reactions=False,
                                                      embed_links=True, attach_files=True, read_message_history=True,
                                                      external_emojis=True)
-                embed = discord.Embed(description=f"**Waiting for Boost Service!**\nTo close the ticket use `!close`", color=62719)
+                embed = discord.Embed(description=f"**Waiting for Boost Service!**\nTo close the ticket use `!close`", color=discord.Colour.blue())
                 embed.set_author(name=f'Server Boosts!')
                 mess_2 = await ticket_channel.send(embed=embed)
                 embed = discord.Embed(title="Opend buy request!",

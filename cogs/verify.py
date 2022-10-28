@@ -51,7 +51,7 @@ class VerifyCog(commands.Cog):
         embed.set_footer(
             icon_url="https://cdn.discordapp.com/attachments/1030518107388788736/1035695718255579208/1.png",
             text="Verify | Simple Service")
-        embed.set_thumbnail("https://media.discordapp.net/attachments/1030518107388788736/1035696927997706321/unknown.png?width=565&height=468")
+        embed.set_thumbnail(url="https://media.discordapp.net/attachments/1030518107388788736/1035696927997706321/unknown.png?width=565&height=468")
         channel = self.bot.get_channel(self.VERIFY_CHANNEL)
         await channel.send(embed=embed, view=view)
         await ctx.send('Sent Verification Embed')
