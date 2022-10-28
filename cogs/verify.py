@@ -10,7 +10,7 @@ class RoleButton(discord.ui.Button):
 
         super().__init__(
             label="\u2705 Verify!",
-            style=discord.enums.ButtonStyle.green,
+            style=discord.enums.ButtonStyle.blurple,
             custom_id="interaction:RoleButton",
         )
 
@@ -42,7 +42,7 @@ class VerifyCog(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(administrator=True)
-    async def post(self, ctx: commands.Context):  # Command
+    async def verify(self, ctx: commands.Context):  # Command
         view = discord.ui.View(timeout=None)
 
         view.add_item(RoleButton(self.role_id))
@@ -54,7 +54,7 @@ class VerifyCog(commands.Cog):
         embed.set_thumbnail(url="https://media.discordapp.net/attachments/1030518107388788736/1035696927997706321/unknown.png?width=565&height=468")
         channel = self.bot.get_channel(self.VERIFY_CHANNEL)
         await channel.send(embed=embed, view=view)
-        await ctx.send('Sent Verification Embed')
+        await ctx.send('Sent')
         await ctx.message.delete()
 
 
