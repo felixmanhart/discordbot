@@ -45,9 +45,9 @@ async def ltc(ctx: commands.Context):
     await message.delete()
 
 @bot.command()
-async def paypal(ctx: commands.Context):
-    em = discord.Embed(colour=discord.Colour.blue(), name="Raions Paypal", description="raionsozials@gmail.com\nfriends & family\n+screenshot", delete_after=60)
-    await ctx.send(embed=em)
+async def paypal(ctx):
+    em = discord.Embed(colour=discord.Colour.blue(), title="Raions Paypal", description="raionsozials@gmail.com\nfriends & family\n+screenshot")
+    await ctx.send(embed=em,  delete_after=60)
     message: discord.Message = ctx.message
 
     await message.delete()
