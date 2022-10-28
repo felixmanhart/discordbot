@@ -62,15 +62,5 @@ class BoostsCog(commands.Cog):
                 await interaction.response.send_message(f"Welcome {interaction.user.mention}", embed=embed, ephemeral=True)
                 return
 
-    @commands.command()
-    async def close(self, ctx):
-        if "ticket-" or "buy-" in ctx.channel.name:
-            embed = discord.Embed(
-                description=f'**Ticket will be closed in 5 seconds.**',
-                color=16711680)
-        await ctx.channel.send(embed = embed)
-        await asyncio.sleep(5)
-        await ctx.channel.delete()
-
 async def setup(bot):
     await bot.add_cog(BoostsCog(bot))
