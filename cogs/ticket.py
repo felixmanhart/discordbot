@@ -24,8 +24,8 @@ class TicketCog(commands.Cog):
         view.add_item(button2)
         emb = discord.Embed(description="Only **create a Ticket** if you want to buy or need help!", title=f"Buy & Support", colour=discord.Colour.blue())
         emb.set_footer(
-            icon_url="https://media.discordapp.net/attachments/1030518107388788736/1034199146736910336/IMG_5300.png?width=580&height=468",
-            text="Verify | Simple Service")
+            icon_url="https://cdn.discordapp.com/attachments/1030518107388788736/1035695718255579208/1.png",
+            text="Ticket System | Simple Service")
         channel = self.bot.get_channel(self.TICKET_CHANNEL)
         await channel.send(embed=emb, view=view)
         await ctx.send("✅ Sent!")

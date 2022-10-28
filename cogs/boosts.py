@@ -25,6 +25,9 @@ class BoostsCog(commands.Cog):
         emb = discord.Embed(description="If you need *cheap* server boosts:", title=f"**Server Boosts**", colour=discord.Colour.purple())
         emb.add_field(name="3 Months", value=f"**7 Boosts** = $8 *paypal*/ $7 *litecoin*\n **14 Boosts** $15 *paypal*/ $10 *litecoin*", inline=False)
         emb.add_field(name="Buy", value="If you want **buy server boosts** click the button down below!", inline=False)
+        emb.set_footer(
+            icon_url="https://cdn.discordapp.com/attachments/1030518107388788736/1035695718255579208/1.png",
+            text="Server Boosts | Simple Service")
         channel = self.bot.get_channel(self.TICKET_CHANNEL)
         await channel.send(embed=emb, view=view)
         await ctx.send(f"✅ Sent!")

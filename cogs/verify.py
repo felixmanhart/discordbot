@@ -49,8 +49,9 @@ class VerifyCog(commands.Cog):
         embed = discord.Embed(description=f"In order to get access to {ctx.guild.name} you must click the button below.", title=f"Verification Required",
                               color=discord.Colour.dark_blue())
         embed.set_footer(
-            icon_url="https://media.discordapp.net/attachments/1030518107388788736/1034199146736910336/IMG_5300.png?width=580&height=468",
+            icon_url="https://cdn.discordapp.com/attachments/1030518107388788736/1035695718255579208/1.png",
             text="Verify | Simple Service")
+        embed.set_image(url="https://cdn.discordapp.com/attachments/1030518107388788736/1035695318924271678/s_logo1.gif")
         channel = self.bot.get_channel(self.VERIFY_CHANNEL)
         await channel.send(embed=embed, view=view)
         await ctx.send('Sent Verification Embed')
