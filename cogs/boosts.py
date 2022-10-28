@@ -27,20 +27,6 @@ class BoostCog(commands.Cog):
         await channel.send(embed=emb, view=view)
         await ctx.send(":yes: Sent!")
 
-    @commands.command()
-    @commands.is_owner()
-    async def setup(self, ctx):
-        button1 = Button(label="Create Ticket!", style=discord.ButtonStyle.blurple, custom_id="ticket_button")
-        button2 = Button(label="Buy!", style=discord.ButtonStyle.green, custom_id="buy_button")
-        view = View()
-        view.add_item(button1)
-        view.add_item(button2)
-        emb = discord.Embed(description="Only **create a Ticket** if you want to buy or need help!",
-                            title=f"Buy & Support", colour=discord.Colour.blue())
-        channel = self.bot.get_channel(self.TICKET_CHANNEL)
-        await channel.send(embed=emb, view=view)
-        await ctx.send("Sent!")
-
     @commands.Cog.listener()
     async def on_interaction(self, interaction):
         if interaction.channel.id == self.TICKET_CHANNEL:
