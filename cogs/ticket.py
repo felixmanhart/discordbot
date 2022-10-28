@@ -17,7 +17,7 @@ class TicketCog(commands.Cog):
     @commands.command()
     @commands.is_owner()
     async def setup(self, ctx):
-        button1 = Button(label="Support!", style=discord.ButtonStyle.red, custom_id="ticket_button")
+        button1 = Button(label="Support!", style=discord.ButtonStyle.red, custom_id="support_button")
         button2 = Button(label="Buy!", style=discord.ButtonStyle.red, custom_id="buy_button")
         view = View()
         view.add_item(button1)
