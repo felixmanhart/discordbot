@@ -2,6 +2,8 @@ import asyncio
 import discord
 from discord.ui import Button, View
 from discord.ext import commands
+from discord.utils import get
+
 
 class BoostsCog(commands.Cog):
     def __init__(self, bot):
@@ -17,15 +19,19 @@ class BoostsCog(commands.Cog):
     @commands.command()
     @commands.is_owner()
     async def boosts(self, ctx):
-        button1 = Button(label="<:booster:1035680324551708824> Buy Boosts!", style=discord.ButtonStyle.grey, custom_id="boost_button")
+        emoji = get(ctx.message.server.emojis, name="booster")
+        button1 = Button(label=f"{emoji} Buy Boosts!", style=discord.ButtonStyle.grey, custom_id="boost_button")
         view = View()
         view.add_item(button1)
-        emb = discord.Embed(description="If you need *cheap* server boosts:", title=f"<:booster:1035680324551708824> **Server Boosts**", colour=discord.Colour.purple())
-        emb.add_field(name="3 Months", value="**7 Boosts** = $8 :pp:/ $7 :ltc:\n **14 Boosts** $15 <:pp:1035680665053696111>/ $10 <:ltc;1035680675350708234>", inline=False)
-        emb.add_field(name="<:yes:1035680359309901864>", value="If you want **buy server boosts** click the button down below!", inline=False)
+        emoji2 = get(ctx.message.server.emojis, name="pp")
+        emoji3 = get(ctx.message.server.emojis, name="yes")
+        emoji4 = get(ctx.message.server.emojis, name="ltc")
+        emb = discord.Embed(description="If you need *cheap* server boosts:", title=f"{emoji} **Server Boosts**", colour=discord.Colour.purple())
+        emb.add_field(name="3 Months", value=f"**7 Boosts** = $8 {emoji2}/ $7 {emoji4}\n **14 Boosts** $15 {emoji2}/ $10 {emoji4}", inline=False)
+        emb.add_field(name=f"{emoji3}", value="If you want **buy server boosts** click the button down below!", inline=False)
         channel = self.bot.get_channel(self.TICKET_CHANNEL)
         await channel.send(embed=emb, view=view)
-        await ctx.send("<:yes:1035680359309901864> Sent!")
+        await ctx.send(f"{emoji3} Sent!")
 
     @commands.Cog.listener()
     async def on_interaction(self, interaction):
