@@ -19,19 +19,15 @@ class BoostsCog(commands.Cog):
     @commands.command()
     @commands.is_owner()
     async def boosts(self, ctx):
-        emoji = get(ctx.message.server.emojis, name="booster")
-        emoji2 = get(ctx.message.server.emojis, name="pp")
-        emoji3 = get(ctx.message.server.emojis, name="yes")
-        emoji4 = get(ctx.message.server.emojis, name="ltc")
-        button1 = Button(label=f"{emoji} Buy Boosts!", style=discord.ButtonStyle.grey, custom_id="boost_button")
+        button1 = Button(label=f"Buy Boosts!", style=discord.ButtonStyle.green, custom_id="boost_button")
         view = View()
         view.add_item(button1)
-        emb = discord.Embed(description="If you need *cheap* server boosts:", title=f"{emoji} **Server Boosts**", colour=discord.Colour.purple())
-        emb.add_field(name="3 Months", value=f"**7 Boosts** = $8 {emoji2}/ $7 {emoji4}\n **14 Boosts** $15 {emoji2}/ $10 {emoji4}", inline=False)
-        emb.add_field(name=f"{emoji3}", value="If you want **buy server boosts** click the button down below!", inline=False)
+        emb = discord.Embed(description="If you need *cheap* server boosts:", title=f"**Server Boosts**", colour=discord.Colour.purple())
+        emb.add_field(name="3 Months", value=f"**7 Boosts** = $8 *paypal*/ $7 *litecoin*\n **14 Boosts** $15 *paypal*/ $10 *litecoin*", inline=False)
+        emb.add_field(name="Buy", value="If you want **buy server boosts** click the button down below!", inline=False)
         channel = self.bot.get_channel(self.TICKET_CHANNEL)
         await channel.send(embed=emb, view=view)
-        await ctx.send(f"{emoji3} Sent!")
+        await ctx.send(f":white:check_mark: Sent!")
 
     @commands.Cog.listener()
     async def on_interaction(self, interaction):
@@ -61,7 +57,7 @@ class BoostsCog(commands.Cog):
                 embed = discord.Embed(description=f"**Waiting for Boost Service!**\nTo close the ticket use `!close`", color=62719)
                 embed.set_author(name=f'Server Boosts!')
                 mess_2 = await ticket_channel.send(embed=embed)
-                embed = discord.Embed(title="📬 Opend buy request!",
+                embed = discord.Embed(title="Opend buy request!",
                                       description=f'Your server boost ticket!: {ticket_channel.mention}',
                                       color=discord.colour.Color.green())
 
