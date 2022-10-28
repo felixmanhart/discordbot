@@ -22,9 +22,9 @@ class TicketCog(commands.Cog):
         view = View()
         view.add_item(button1)
         view.add_item(button2)
-        embed = discord.Embed(description="Only **create a Ticket** if you want to buy or need help!", title=f"Buy & Support", colour=discord.Colour.blue())
+        emb = discord.Embed(description="Only **create a Ticket** if you want to buy or need help!", title=f"Buy & Support", colour=discord.Colour.blue())
         channel = self.bot.get_channel(self.TICKET_CHANNEL)
-        await channel.send(embed=embed, view=view)
+        await channel.send(embed=emb, view=view)
         await ctx.send("Sent!")
 
 
@@ -69,7 +69,7 @@ class TicketCog(commands.Cog):
             embed = discord.Embed(
                 description=f'**Ticket will be closed in 5 seconds.**',
                 color=16711680)
-        await ctx.channel.send(embed=embed)
+        await ctx.channel.send(embed = embed)
         await asyncio.sleep(5)
         await ctx.channel.delete()
 
