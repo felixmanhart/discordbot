@@ -17,8 +17,8 @@ class TicketCog(commands.Cog):
     @commands.command()
     @commands.is_owner()
     async def setup(self, ctx):
-        button1 = Button(label="Support!", style=discord.ButtonStyle.red, custom_id="ticket_button")
-        button2 = Button(label="Buy!", style=discord.ButtonStyle.red, custom_id="buy_button")
+        button1 = Button(label="Hilfe!", style=discord.ButtonStyle.red, custom_id="ticket_button")
+        button2 = Button(label="Nitro kaufen!", style=discord.ButtonStyle.red, custom_id="buy_button")
         view = View()
         view.add_item(button1)
         view.add_item(button2)
@@ -38,29 +38,36 @@ class TicketCog(commands.Cog):
                 guild = self.bot.get_guild(self.GUILD_ID)
                 for ticket in guild.channels:
                     if str(interaction.user.id) in ticket.name:
-                        embed = discord.Embed(description=f"You can't open support tickets twice.\nYou alredy opend a support ticket!: {ticket.mention}")
-                        await interaction.response.send_message(embed=embed, ephemeral=True)
+                        embed2 = discord.Embed(
+                            description=f"Du kannst keine Hilfe-Anfragen mehrmals stellen!\nDu hast bereits eine gestellt: {ticket.mention}")
+                        await interaction.response.send_message(embed=embed2, ephemeral=True)
                         return
 
                 category = self.bot.get_channel(self.CATEGORY_ID)
                 ticket_num = 1 if len(category.channels) == 0 else int(category.channels[-1].name.split("-")[1]) + 1
                 ticket_channel = await guild.create_text_channel(f"support-{ticket_num}", category=category,
-                                                                topic=f"Support ticket opend by {interaction.user} \nClient-ID: {interaction.user.id}")
+                                                                 topic=f"Member {interaction.user} \nClient-ID: {interaction.user.id}")
 
-                await ticket_channel.set_permissions(guild.get_role(self.TEAM_ROLE), send_messages=True, read_messages=True, add_reactions=False,
-                                                    embed_links=True, attach_files=True, read_message_history=True,
-                                                    external_emojis=True)
-                await ticket_channel.set_permissions(interaction.user, send_messages=True, read_messages=True, add_reactions=False,
-                                                    embed_links=True, attach_files=True, read_message_history=True,
-                                                    external_emojis=True)
-                embed = discord.Embed(description=f'Welcome {interaction.user.mention}!You opend a **support ticket**. To close the ticket use`!close`' ,color=discord.Colour.blue())
-                embed.set_author(name=f'Support Ticket ticket!')
-                mess_2 = await ticket_channel.send(embed=embed)
-                embed = discord.Embed(title="Opend support ticket!",
-                                    description=f'Your support ticket!: {ticket_channel.mention}',
-                                    color=discord.colour.Color.green())
+                await ticket_channel.set_permissions(guild.get_role(self.TEAM_ROLE), send_messages=True,
+                                                     read_messages=True, add_reactions=False,
+                                                     embed_links=True, attach_files=True, read_message_history=True,
+                                                     external_emojis=True)
+                await ticket_channel.set_permissions(interaction.user, send_messages=True, read_messages=True,
+                                                     add_reactions=False,
+                                                     embed_links=True, attach_files=True, read_message_history=True,
+                                                     external_emojis=True)
+                embed3 = discord.Embed(description=f"""
+                **Warten auf {self.TEAM_ROLE}...**\n
+                *Bitte das Team nicht pingen, wir werden uns bei dir melden.*\n
+                Um das Ticket zu schließen, nutzte `!close`.
+                """, color=discord.Colour.blue())
+                embed3.set_author(name=f'Support-Anfrage!')
+                mess_2 = await ticket_channel.send(embed=embed3)
+                embed3 = discord.Embed(title="Anfrage gesendet!",
+                                      description=f'Hier findest du deine Anfrage!: {ticket_channel.mention}',
+                                      color=discord.colour.Color.green())
 
-                await interaction.response.send_message(embed=embed, ephemeral=True)
+                await interaction.response.send_message(embed=embed3, ephemeral=True)
                 return
 
     @commands.Cog.listener()
@@ -71,14 +78,14 @@ class TicketCog(commands.Cog):
                 for ticket in guild.channels:
                     if str(interaction.user.id) in ticket.name:
                         embed = discord.Embed(
-                            description=f"You can't send buy requests twice.\nYou alredy sent a request!: {ticket.mention}")
+                            description=f"Du kannst keine Kaufanfrage mehrmals senden!\nDu hast bereits eine gestellt: {ticket.mention}")
                         await interaction.response.send_message(embed=embed, ephemeral=True)
                         return
 
                 category = self.bot.get_channel(self.CATEGORY_ID)
                 ticket_num = 1 if len(category.channels) == 0 else int(category.channels[-1].name.split("-")[1]) + 1
-                ticket_channel = await guild.create_text_channel(f"buy-{ticket_num}", category=category,
-                                                                 topic=f"Buyer {interaction.user} \nClient-ID: {interaction.user.id}")
+                ticket_channel = await guild.create_text_channel(f"nitro-{ticket_num}", category=category,
+                                                                 topic=f"Käufer {interaction.user} \nClient-ID: {interaction.user.id}")
 
                 await ticket_channel.set_permissions(guild.get_role(self.TEAM_ROLE), send_messages=True,
                                                      read_messages=True, add_reactions=False,
@@ -88,23 +95,27 @@ class TicketCog(commands.Cog):
                                                      add_reactions=False,
                                                      embed_links=True, attach_files=True, read_message_history=True,
                                                      external_emojis=True)
-                embed = discord.Embed(description=f"**Waiting for Ticket Service!**\nTo close the ticket use `!close`", color=62719)
-                embed.set_author(name=f'New ticket!')
-                mess_2 = await ticket_channel.send(embed=embed)
-                embed = discord.Embed(title="Opend Buy ticket!",
-                                      description=f'Your Buy Request!: {ticket_channel.mention}',
+                embe = discord.Embed(description=f"""
+                **Warten auf {self.TEAM_ROLE}...**\n
+                *Bitte das Team nicht pingen, wir werden uns bei dir melden.*\n
+                Um das Ticket zu schließen, nutzte `!close`.
+                """, color=discord.Colour.blue())
+                embe.set_author(name=f'Nitro kaufen!')
+                mess_2 = await ticket_channel.send(embed=embe)
+                embe = discord.Embed(title="Anfrage gesendet!",
+                                      description=f'Hier findest du deine Anfrage!: {ticket_channel.mention}',
                                       color=discord.colour.Color.green())
 
-                await interaction.response.send_message(f"Welcome {interaction.user.mention}", embed=embed, ephemeral=True)
+                await interaction.response.send_message(embed=embe, ephemeral=True)
                 return
 
     @commands.command()
     async def close(self, ctx):
-        if "support-" or "buy-" or "boost-" in ctx.channel.name:
+        if "support-" or "nitro-" or "boost-" in ctx.channel.name:
             embed = discord.Embed(
                 description=f'**Ticket will be closed in 5 seconds.**',
                 color=16711680)
-        await ctx.channel.send(embed = embed)
+        await ctx.channel.send(embed=embed)
         await asyncio.sleep(5)
         await ctx.channel.delete()
 

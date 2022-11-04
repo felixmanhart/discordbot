@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
     
-bot = commands.Bot(command_prefix="!", intents=discord.Intents.all())
+bot = commands.Bot(command_prefix="s!", intents=discord.Intents.all())
 bot.remove_command("help")
 
 @bot.event
@@ -17,13 +17,16 @@ async def on_ready():
 
 @bot.command()
 async def help(ctx):
-    em = discord.Embed(title='Rude Alts Help', description="""
-    `!ping` This pings @everyone. You only can use it in your own Marketplace.\n
-    `!ban` Bans an specified user.\n
-    `!unban` Unbans an specified user.\n
-    `!kick` Kicks specified user.\n
-    `!mute` Timeouts a specified user\n
-    `!close` Can only used in a ticket. Closes the ticket.
+    em = discord.Embed(title='Bot Hilfe!', description="""
+    **Moderation:**\n
+    `ban` bannt einen Nutzer.\n 
+    `kick` kick einen Nutzer.\n
+    `unban` entbannt einen Nutzer.\n
+    `mute` setzt einen Nutzer ins Timeout.\n
+    \n
+    **Ulity**
+    `nuke` löscht bestimmte Anzahl an Nachrichten im Chat\.n
+    `mehr kommt später...`  
     """, colour=discord.Colour.red())
     await ctx.send(embed=em)
 
@@ -37,7 +40,7 @@ async def ping(ctx: commands.Context):
     await message.delete()
 
 @bot.command()
-@commands.has_role("verified")
+@commands.has_role("Ticket Service")
 async def ltc(ctx: commands.Context):
     await ctx.send(f'||ltc1q52zrfd6cernk0325quwmwsd9jkued2w9rswz43||', delete_after=60)
     message: discord.Message = ctx.message
@@ -45,6 +48,7 @@ async def ltc(ctx: commands.Context):
     await message.delete()
 
 @bot.command()
+@commands.has_role("Ticket Service")
 async def paypal(ctx):
     em = discord.Embed(colour=discord.Colour.blue(), title="Raions Paypal", description="**raionsozials@gmail.com**\n**friends & family**\n**+screenshot**")
     await ctx.send(embed=em)

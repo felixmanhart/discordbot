@@ -19,12 +19,18 @@ class BoostsCog(commands.Cog):
     @commands.command()
     @commands.is_owner()
     async def boosts(self, ctx):
-        button1 = Button(label=f"Buy Boosts!", style=discord.ButtonStyle.green, custom_id="boost_button")
+        button1 = Button(label=f"Boosts kaufen!", style=discord.ButtonStyle.green, custom_id="boost_button")
         view = View()
         view.add_item(button1)
-        emb = discord.Embed(description="If you need *cheap* server boosts:", title=f"**Server Boosts**", colour=discord.Colour.purple())
-        emb.add_field(name="3 Months", value=f"**7 Boosts** = $8 *paypal*/ $7 *litecoin*\n **14 Boosts** $15 *paypal*/ $10 *litecoin*", inline=False)
-        emb.add_field(name="Buy", value="If you want **buy server boosts** click the button down below!", inline=False)
+        emb = discord.Embed(description=""""
+        **Hier findest du günstige Server Boosts**\n
+        Um Server Boosts zu kaufen musst du den Button drücken.\n
+        \n
+        **Preise**\n
+        3 Monate:\n
+        *Level 2* 6€\n
+        *Level 3* 10€        
+        """, title=f"**Server Boosts**", colour=discord.Colour.purple())
         emb.set_footer(
             icon_url="https://cdn.discordapp.com/attachments/1030518107388788736/1035695718255579208/1.png",
             text="Server Boosts | Simple Service")
@@ -40,14 +46,14 @@ class BoostsCog(commands.Cog):
                 for ticket in guild.channels:
                     if str(interaction.user.id) in ticket.name:
                         embed = discord.Embed(
-                            description=f"You can't open server boost tickets twice.\nYou alredy opend a server boost ticket!: {ticket.mention}")
+                            description=f"Du kannst keine Kaufanfrage mehrmals senden!\nDu hast bereits eine gestellt: {ticket.mention}")
                         await interaction.response.send_message(embed=embed, ephemeral=True)
                         return
 
                 category = self.bot.get_channel(self.CATEGORY_ID)
                 ticket_num = 1 if len(category.channels) == 0 else int(category.channels[-1].name.split("-")[1]) + 1
                 ticket_channel = await guild.create_text_channel(f"boost-{ticket_num}", category=category,
-                                                                 topic=f"Buyer {interaction.user} \nClient-ID: {interaction.user.id}")
+                                                                 topic=f"Käufer {interaction.user} \nClient-ID: {interaction.user.id}")
 
                 await ticket_channel.set_permissions(guild.get_role(self.TEAM_ROLE), send_messages=True,
                                                      read_messages=True, add_reactions=False,
@@ -57,14 +63,18 @@ class BoostsCog(commands.Cog):
                                                      add_reactions=False,
                                                      embed_links=True, attach_files=True, read_message_history=True,
                                                      external_emojis=True)
-                embed = discord.Embed(description=f"**Waiting for Boost Service!**\nTo close the ticket use `!close`", color=discord.Colour.blue())
+                embed = discord.Embed(description=f"""
+                **Warten auf {self.TEAM_ROLE}...**
+                *Bitte das Team nicht pingen, wir werden uns bei dir melden.*
+                Um das Ticket zu schließen, nutzte `!close`.
+                """, color=discord.Colour.blue())
                 embed.set_author(name=f'Server Boosts!')
                 mess_2 = await ticket_channel.send(embed=embed)
-                embed = discord.Embed(title="Opend buy request!",
-                                      description=f'Your server boost ticket!: {ticket_channel.mention}',
+                embed = discord.Embed(title="Anfrage gesendet!",
+                                      description=f'Hier findest du deine Anfrage!: {ticket_channel.mention}',
                                       color=discord.colour.Color.green())
 
-                await interaction.response.send_message(f"Welcome {interaction.user.mention}", embed=embed, ephemeral=True)
+                await interaction.response.send_message(embed=embed, ephemeral=True)
                 return
 
 async def setup(bot):

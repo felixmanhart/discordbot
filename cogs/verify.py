@@ -9,8 +9,8 @@ class RoleButton(discord.ui.Button):
         self.role_id = role_id
 
         super().__init__(
-            label="\u2705 Verify!",
-            style=discord.enums.ButtonStyle.blurple,
+            label="\u2705 Verifizieren!",
+            style=discord.enums.ButtonStyle.red,
             custom_id="interaction:RoleButton",
         )
 
@@ -24,10 +24,10 @@ class RoleButton(discord.ui.Button):
 
         if role not in user.roles:
             await user.add_roles(role)
-            await interaction.response.send_message(f"Verification succesful!", ephemeral=True)
+            await interaction.response.send_message(f"Erfolgreich verifiziert!", ephemeral=True)
 
         else:
-            await interaction.response.send_message(f"You are already verified!", ephemeral=True)
+            await interaction.response.send_message(f"Du hast dich bereits verifiziert!", ephemeral=True)
 
 
 class VerifyCog(commands.Cog):
@@ -46,11 +46,14 @@ class VerifyCog(commands.Cog):
         view = discord.ui.View(timeout=None)
 
         view.add_item(RoleButton(self.role_id))
-        embed = discord.Embed(description=f"In order to get access to {ctx.guild.name} you must click the button below.", title=f"Verification Required",
-                              color=discord.Colour.blue())
+        embed = discord.Embed(description=f"""
+        Um Teil unsers Servers zu werden, musst du dich erstmal verifizieren,\n
+        um deine Identität nachzuweisen.
+        """, title=f"Verifizierung",
+                              color=discord.Colour.red())
         embed.set_footer(
             icon_url="https://cdn.discordapp.com/attachments/1030518107388788736/1035695718255579208/1.png",
-            text="Verify | Simple Service")
+            text="Verifikation | Simple Service")
         embed.set_thumbnail(url="https://media.discordapp.net/attachments/1030518107388788736/1035696927997706321/unknown.png?width=565&height=468")
         channel = self.bot.get_channel(self.VERIFY_CHANNEL)
         await channel.send(embed=embed, view=view)
