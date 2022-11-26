@@ -38,16 +38,4 @@ if __name__ == "__main__":
 
     bot = Client(command_prefix="$", application_id=1035657488533573652, initial_extensions=initial_extensions)
 
-async def load():
-    for filename in os.listdir('./cogs'):
-        if filename.endswith('.py') and filename.find("__") == -1:
-            await bot.load_extension(f'cogs.{filename[:-3]}')
-
-
-async def main():
-    await load()
-    await bot.start(os.getenv("TOKEN"))
-
-
-
-asyncio.run(main())
+bot.run(os.getenv("TOKEN"))
