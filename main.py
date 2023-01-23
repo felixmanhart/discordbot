@@ -2,8 +2,9 @@ import asyncio
 import os
 import discord
 from discord.ext import commands
+from discord.ext.commands import Bot
 
-bot = discord.Bot(command_prefix = "!")
+bot = Bot(command_prefix = "!", intents=discord.Intents.default())
 
 @bot.event
 async def on_ready():
@@ -22,4 +23,4 @@ async def on_command_error(ctx, error):
         await ctx.send(embed=embed)
 
 
-bot.run(os.getenv("TOKEN"))
+bot.run("MTAyMzYyNDU1OTkzODc3NzE2OQ.GbWcde.aK9epNRBLanTd0h4cDtJTeOri0CD3E7IXcxIm4")
