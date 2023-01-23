@@ -8,7 +8,7 @@ bot = Bot(command_prefix = "!", intents=discord.Intents.default())
 
 @bot.event
 async def on_ready():
-    print("bot is on")
+    print("bot is on!")
 
 @bot.command()
 @commands.has_role("ping permission")
