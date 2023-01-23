@@ -1,41 +1,25 @@
 import asyncio
 import os
 import discord
-from discord import app_commands
 from discord.ext import commands
 
+bot = discord.Bot(command_prefix = "!")
 
-from dotenv import load_dotenv
+@bot.event
+async def on_ready():
+    print("bot is on")
 
-load_dotenv()
+@bot.command()
+@commands.has_role("ping permission")
+@commands.cooldown(1, 172800, commands.BucketType.user)
+async def ping(ctx):
+    ctx.send(ctx.message.guild.default_role)
 
-class Client(commands.Bot):
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        embed = discord.Embed(title="Error", description="You can only ping every 48h!", colour=discord.Colour.red())
+        await ctx.send(embed=embed)
 
-    def __init__(self, command_prefix, application_id, initial_extensions):
-        super().__init__(
-            command_prefix=command_prefix,
-            application_id=application_id,
-            intents=discord.Intents.all()
-        )
-
-        self.initial_extensions = initial_extensions
-
-    async def setup_hook(self):
-        for ext in self.initial_extensions:
-            await self.load_extension(ext)
-
-        await bot.tree.sync(guild=discord.Object(id=938105317781307392))
-
-    async def on_ready(self):
-        print(f"Bot is online")
-
-
-if __name__ == "__main__":
-    initial_extensions = [
-        "cogs.ticket",
-        "cogs.utility"
-    ]
-
-    bot = Client(command_prefix="$", application_id=1035657488533573652, initial_extensions=initial_extensions)
 
 bot.run(os.getenv("TOKEN"))
